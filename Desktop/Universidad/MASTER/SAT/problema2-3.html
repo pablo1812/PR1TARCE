@@ -1,0 +1,27 @@
+var mySocket = null;
+var serverUrl = 'wss://echo.websocket.org';
+var oWebSocket = window. WebSocket || window.MozWebSocket;
+if (oWebSocket) (
+mySocket = new oWebSocket (serverUrl);
+if (mySocket)
+console.log (mySocket);
+mySocket.onopen= onSocketOpen; mySocket.onclose= onSocketClose;
+mySocket.onmessage= onSocketMessage;
+mySocket.onerror= onSocketError;
+setTimeout (closeSocket, 5000);
+)
+)
+function onSocketOpen (evt) (console.log ("Socket is now open.");
+mySocket.send ("Hello from my first live web socket!"); )
+function onSocketClose (evt) (console.log ("Socket is now closed."); )
+function onSocketMessage (evt) (console.log ("Recieved from socket: ",
+evt.data);)
+function onSocketError (evt) (console.log ("Error with/from socket!:");
+console.log (evt);)
+function closeSocket () (
+if (mySocket.readyState !== mySocket.CLOSED) (
+console.log ("Closing socket from our end (timer).");
+mySocket.close ();
+) else console.log ("Socket was already closed (timer).");
+
+)
